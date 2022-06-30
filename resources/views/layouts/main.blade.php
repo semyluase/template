@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title.' | '.env('APP_NAME','Template') }}</title>
+    <title>{{ $title . ' | ' . env('APP_NAME', 'Template') }}</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     {{-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"> --}}
@@ -13,7 +12,8 @@
 
     <link rel="stylesheet" href="{{ asset('assets/vendor/mazer/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/mazer/vendors/bootstrap-icons/bootstrap-icons.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/mazer/vendors/jquery-datatables/jquery.dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/vendor/mazer/vendors/jquery-datatables/jquery.dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/mazer/vendors/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/mazer/vendors/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/mazer/vendors/toastify/toastify.css') }}">
@@ -41,12 +41,10 @@
             </div>
             <footer class="bg-success mb-0 text-white">
                 <div class="footer clearfix text-white">
-                    <div class="float-start m-3 p-3">
-                        <span>2021 &copy; Mazer</span>
-                    </div>
                     <div class="float-end m-3 p-3">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
-                            by <a href="https://ahmadsaugi.com" class="text-white">Saugi</a></p>
+                        <span>{{ date('Y') }} &copy; <a href="https://fukuryo.co.id" class="text-white">PT.
+                                Fukuryo
+                                Indonesia</a></span>
                     </div>
                 </div>
             </footer>
@@ -57,7 +55,9 @@
     <script src="{{ asset('assets/vendor/mazer/vendors/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jqueryUI/jquery.blockUI.js') }}"></script>
     <script src="{{ asset('assets/vendor/mazer/vendors/jquery-datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/mazer/vendors/jquery-datatables/custom.jquery.dataTables.bootstrap5.min.js') }}"></script>
+    <script
+        src="{{ asset('assets/vendor/mazer/vendors/jquery-datatables/custom.jquery.dataTables.bootstrap5.min.js') }}">
+    </script>
     <script src="{{ asset('assets/vendor/mazer/vendors/chartjs/Chart.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jstree/jstree.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/mazer/vendors/fontawesome/js/all.min.js') }}"></script>
@@ -116,42 +116,42 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes'
-            }).then(async(result) => {
+            }).then(async (result) => {
                 console.log(result);
-                if(result.value) {
+                if (result.value) {
                     const url = `${baseUrl}/logout`;
 
                     const fetchOptions = {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            'X-CSRF-TOKEN':csrf
+                            'X-CSRF-TOKEN': csrf
                         },
                     };
 
                     const response = await fetch(url, fetchOptions)
-                    .then(response => {
-                        if(!response.ok) {
-                            const errorMessage = response.text();
-                            throw new Error(errorMessage);
-                        }
+                        .then(response => {
+                            if (!response.ok) {
+                                const errorMessage = response.text();
+                                throw new Error(errorMessage);
+                            }
 
-                        return response.json()
-                    }).then(response => {
-                        location.replace(`${baseUrl}/login`);
-                    });
+                            return response.json()
+                        }).then(response => {
+                            location.replace(`${baseUrl}/login`);
+                        });
                 }
             });
         }
     </script>
 
     <?php
-        $js = isset($js) ? $js : [];
-        if ($js) {
-            for ($i = 0; $i < count($js); $i++) {
-                echo '<script src="'.asset($js[$i]).'?v='.rand().'"></script>';
-            }
+    $js = isset($js) ? $js : [];
+    if ($js) {
+        for ($i = 0; $i < count($js); $i++) {
+            echo '<script src="' . asset($js[$i]) . '?v=' . rand() . '"></script>';
         }
+    }
     ?>
 </body>
 
