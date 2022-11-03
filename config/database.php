@@ -109,6 +109,8 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'encrypt' => 'no', // alternatively, defer to an env variable
+            'trust_server_certificate' => 'false', // alternatively, defer to an env variable
         ],
 
         'sage' => [
@@ -122,6 +124,8 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'encrypt' => 'no', // alternatively, defer to an env variable
+            'trust_server_certificate' => 'false', // alternatively, defer to an env variable
         ],
 
         'spisy' => [
@@ -135,6 +139,8 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            'encrypt' => 'no', // alternatively, defer to an env variable
+            'trust_server_certificate' => 'false', // alternatively, defer to an env variable
         ],
 
     ],
@@ -169,7 +175,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [
